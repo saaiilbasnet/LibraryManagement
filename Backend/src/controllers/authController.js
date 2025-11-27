@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
-const db = require('../database/connection'); // your db.js
-const User = db.users;  // ✅ now User.findOne() works
+const db = require('../database/connection');
+const User = db.users; 
 const generateToken = require('../services/generateJwtToken');
 
 
@@ -133,13 +133,15 @@ const getProfile = async(req, res)=>{
 
     try {
 
-        const user = await User.findByPk(req.user.id, {
-            attributes: { exclude: ['password'] }
+        const user = await User.findByPk(req.user.id,{
+            attributes: { exclude: ['password']
+
+             }
         });
 
         if (!user) {
             return res.status(404).json({ 
-                message: 'User not found' 
+                message: 'User not found!' 
             });
         }
 
