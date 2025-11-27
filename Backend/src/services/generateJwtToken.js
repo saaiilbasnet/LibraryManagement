@@ -7,8 +7,9 @@ const generateToken = (user) => {
             email: user.email, 
             role: user.role 
         },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRE || process.env.JWT_EXPIRY }
+            process.env.JWT_SECRET,{ 
+            expiresIn: process.env.JWT_EXPIRE || process.env.JWT_EXPIRY
+         }
     );
 }
 

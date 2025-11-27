@@ -7,8 +7,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const authRoute = require('./routes/authRoute');
+const bookRoute = require('./routes/bookRoute');
 
 app.use("/api/auth",authRoute);
+app.use("/api/book",bookRoute)
 
 // Error handling middleware
 

@@ -21,8 +21,8 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.users = require('./models/userModel')(sequelize,DataTypes);
+db.books = require('./models/bookModel')(sequelize,DataTypes);
 // db.borrows = require('./models/borrowModel')(sequelize,DataTypes);
-// db.books = require('./models/bookModel')(sequelize,DataTypes);
 // db.reviews = require('./models/reviewModel')(sequelize,DataTypes);
 
 // migration into supabase
