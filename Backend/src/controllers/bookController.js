@@ -71,7 +71,7 @@ const addBook = async(req, res)=>{
 const updateBook = async (req, res) => {
     try {
         const { title, author, genre, publishedYear, stock } = req.body;
-          const bookId = req.params.id;
+          const bookId = req.params.bookId;
 
         // console.log("Book ID : "+bookId);
         
@@ -111,7 +111,7 @@ const updateBook = async (req, res) => {
 
 const deleteBook = async(req, res)=>{
 
-     const bookId  = req.params.id;
+     const bookId  = req.params.bookId;
     const book = await Book.findByPk(bookId);
 
     if (!book) {

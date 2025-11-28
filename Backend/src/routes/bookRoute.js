@@ -4,8 +4,8 @@ const { authMiddleware, roleMiddleware } = require('../middlewares/authMiddlewar
 
 // admin routes only
 router.post('/add', authMiddleware, roleMiddleware('ADMIN'), addBook);
-router.put('/update/:id', authMiddleware, roleMiddleware('ADMIN'), updateBook);
-router.delete('/delete/:id', authMiddleware, roleMiddleware('ADMIN'), deleteBook);
+router.put('/update/:bookId', authMiddleware, roleMiddleware('ADMIN'), updateBook);
+router.delete('/delete/:bookId', authMiddleware, roleMiddleware('ADMIN'), deleteBook);
 router.get('/all',authMiddleware,getBooks);
 
 module.exports = router

@@ -4,7 +4,7 @@ const {authMiddleware, roleMiddleware} = require('../middlewares/authMiddleware'
 
 router.get('/all', authMiddleware, roleMiddleware('ADMIN'), getAllBorrow);
 router.post('/request',authMiddleware, roleMiddleware('MEMBER'),addBorrowRequest);
-router.put('/return/:id',authMiddleware, returnBorrow);
+router.put('/return/:borrowId',authMiddleware, returnBorrow);
 
 
 module.exports = router

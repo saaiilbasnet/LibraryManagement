@@ -104,7 +104,7 @@ const returnBorrow = async (req, res)=>{
 
     try {
 
-        const borrowId = req.params.id;
+        const borrowId = req.params.borrowId;
         const { returnDate } = req.body;
         const userId = req.user.id;
         const userRole = req.user.role;
