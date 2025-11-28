@@ -1,40 +1,56 @@
-
-const {Sequelize, DataTypes} = require('sequelize');
-// const CTN_STRING = process.env.DB_CONNECTION;
+const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize(process.env.DB_CONNECTION);
 
-// authenticating connection
-
+// Authenticate DB connection
 sequelize.authenticate()
-.then(()=>{
+  .then(() => {
     console.log("Successfully connected to Supabase!");
-    
-})
-.catch((error)=>{
-  console.log("Error: "+error);
-  
-})
+  })
+  .catch((error) => {
+    console.log("Error: " + error);
+  });
 
-const db = {}
+const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.users = require('./models/userModel')(sequelize,DataTypes);
-db.books = require('./models/bookModel')(sequelize,DataTypes);
-// db.borrows = require('./models/borrowModel')(sequelize,DataTypes);
-// db.reviews = require('./models/reviewModel')(sequelize,DataTypes);
+// Import models
 
-// migration into supabase
+db.users = require('./models/userModel')(sequelize, DataTypes);
+db.books = require('./models/bookModel')(sequelize, DataTypes);
+db.borrows = require('./models/borrowModel')(sequelize, DataTypes);
 
-sequelize.sync({alter:true})
-.then(()=>{
+
+db.borrows.belongsTo(db.users, {
+  foreignKey: "userId",
+  as: "user",
+});
+
+db.users.hasMany(db.borrows, {
+  foreignKey: "userId",
+  as: "borrows",
+});
+
+
+db.borrows.belongsTo(db.books, {
+  foreignKey: "bookId",
+  as: "book",
+});
+
+db.books.hasMany(db.borrows, {
+  foreignKey: "bookId",
+  as: "borrows",
+});
+
+
+// Sync to Supabase
+sequelize.sync({ alter: true })
+  .then(() => {
     console.log("Migrated to supabase");
-    
-})
-.catch((error)=>{
-    console.log("Error : "+error);
-    
-})
+  })
+  .catch((error) => {
+    console.log("Error : " + error);
+  });
 
 module.exports = db;

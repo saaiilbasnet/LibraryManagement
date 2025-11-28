@@ -8,9 +8,11 @@ app.use(cookieParser());
 
 const authRoute = require('./routes/authRoute');
 const bookRoute = require('./routes/bookRoute');
+const borrowRoute = require('./routes/borrowRoute')
 
 app.use("/api/auth",authRoute);
 app.use("/api/book",bookRoute)
+app.use("/api/borrow", borrowRoute);
 
 // Error handling middleware
 
